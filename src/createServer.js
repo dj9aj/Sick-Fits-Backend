@@ -3,7 +3,7 @@ const Mutation = require('./resolvers/Mutation');
 const Query = require('./resolvers/Query');
 const db = require('./db');
 
-// Create the GraphQL Yoga Server
+// Create the GraphQL Yoga Server. It's built on top of an Express and Apollo server.   
 
 function createServer() {
   return new GraphQLServer({
