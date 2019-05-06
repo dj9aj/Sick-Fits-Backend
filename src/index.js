@@ -1,5 +1,5 @@
 // let's go!
-require('dotenv').config({ path: 'variables.env' });
+require('dotenv').config({ path: 'variables.env' }); // make env variables available throughout app.
 const createServer = require('./createServer');
 const db = require('./db');
 
@@ -10,9 +10,10 @@ const server = createServer();
 
 server.start(
   {
+    // Only want endpoint to be visited from approved URLs.
     cors: {
       credentials: true,
-      origin: process.env.FRONTEND_URL,
+      origin: process.env.FRONTEND_URL, // Only frontend can access backend
     },
   },
   deets => {
