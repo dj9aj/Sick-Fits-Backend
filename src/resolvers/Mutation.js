@@ -1,15 +1,12 @@
 const Mutations = {
   async createItem(parent, args, ctx, info) {
     // TODO: Check if they are logged in
-
-    const item = await ctx.db.mutation.createItem(
-      {
+    // Have access to db functionality through ctx. 
+    const item = await ctx.db.mutation.createItem({
         data: {
           ...args,
         },
-      },
-      info
-    );
+      }, info); // info variable will insure that the item is returned from the DB once it has been created
 
     console.log(item);
 
