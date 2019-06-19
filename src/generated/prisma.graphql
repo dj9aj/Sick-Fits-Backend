@@ -1,5 +1,5 @@
 # source: https://eu1.prisma.sh/jack-doyle/sick-fits/dev
-# timestamp: Tue Jun 18 2019 21:36:02 GMT+0100 (British Summer Time)
+# timestamp: Wed Jun 19 2019 21:37:31 GMT+0100 (British Summer Time)
 
 type AggregateItem {
   count: Int!
@@ -469,6 +469,15 @@ type PageInfo {
   endCursor: String
 }
 
+enum Permission {
+  ADMIN
+  USER
+  ITEMCREATE
+  ITEMUPDATE
+  ITEMDELETE
+  PERMISSIONUPDATE
+}
+
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item]!
@@ -498,6 +507,7 @@ type User implements Node {
   resetTokenExpiry: Float
   createdAt: DateTime!
   updatedAt: DateTime!
+  permissions: [Permission!]!
 }
 
 """A connection to a list of items."""
@@ -517,6 +527,11 @@ input UserCreateInput {
   password: String!
   resetToken: String
   resetTokenExpiry: Float
+  permissions: UserCreatepermissionsInput
+}
+
+input UserCreatepermissionsInput {
+  set: [Permission!]
 }
 
 """An edge in a connection."""
@@ -556,6 +571,7 @@ type UserPreviousValues {
   resetTokenExpiry: Float
   createdAt: DateTime!
   updatedAt: DateTime!
+  permissions: [Permission!]!
 }
 
 type UserSubscriptionPayload {
@@ -603,6 +619,7 @@ input UserUpdateInput {
   password: String
   resetToken: String
   resetTokenExpiry: Float
+  permissions: UserUpdatepermissionsInput
 }
 
 input UserUpdateManyMutationInput {
@@ -611,6 +628,11 @@ input UserUpdateManyMutationInput {
   password: String
   resetToken: String
   resetTokenExpiry: Float
+  permissions: UserUpdatepermissionsInput
+}
+
+input UserUpdatepermissionsInput {
+  set: [Permission!]
 }
 
 input UserWhereInput {

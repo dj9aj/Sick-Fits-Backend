@@ -40,6 +40,7 @@ const Mutations = {
      // 3. Delete it!
      return ctx.db.mutation.deleteItem({ where }, info);
   },
+  // Name of method has to match with name from the mutation in the schema.   
   async signup(parent, args, ctx, info) {
     // lowercase their email
     args.email = args.email.toLowerCase();
