@@ -53,6 +53,5 @@ const Query = {
     return order;
   },
 };
-};
 
 module.exports = Query;

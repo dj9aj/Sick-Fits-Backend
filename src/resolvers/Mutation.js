@@ -47,7 +47,13 @@ const Mutations = {
   async deleteItem(parent, args, ctx, info) {
     const where = { id: args.id };
      // 1. find the item
-     const item = await ctx.db.query.item({ where }, `{ id title}`);
+    const item = await ctx.db.query.item({ where }, `{ 
+      id 
+      title 
+      user {
+        id
+      }
+    }`);
      // 2. Check if they own that item, or have the permissions
     const ownsItem = item.user.id === ctx.request.userId;
     const hasPermissions = ctx.request.user.permissions.some(permission =>
@@ -88,6 +94,8 @@ const Mutations = {
     return user;
   },
   async signin(parent, { email, password }, ctx, info) {
+    console.log('password: ', password);
+    console.log('email: ', email);
     // 1. check if there is a user with that email
     const user = await ctx.db.query.user({ where: { email } });
     if (!user) {
