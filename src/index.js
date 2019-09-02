@@ -35,6 +35,7 @@ server.express.use(async (req, res, next) => {
   next();
 });
 
+// Start the server
 server.start(
   {
     // Only want endpoint to be visited from approved URLs.
